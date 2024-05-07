@@ -1,0 +1,37 @@
+
+
+Le 100 m
+- Le 400 m
+- Le 5000 m
+- Le marathon
+- Le relais 4*400 m
+
+
+1 fichier par athlete avec toutes les performances
+
+
+fichier type :
+
+prenom_sportif
+nom_sportif
+
+date_entrainement (char JJ/MM/AA) type_epreuve (char) temps (float sec)
+date_entrainement type_epreuve temps
+date_entrainement type_epreuve temps (position si relais)
+
+!!il ne peut y avoir qu’un seul entrainement de relais par jour
+
+
+
+Lors de l’exécution du programme, on doit pouvoir :
+
+- Entrer et sauvegarder les informations/résultats d’un nouvel entrainement
+- Consulter l’historique des entrainements : par athlète et/ou par épreuve et/ou par date.
+- Consulter des statistiques de performances de chaque athlète.
+
+• Statistiques sur les athlètes : l’entraineur doit pouvoir consulter
+
+- Un résumé des performances d’un athlète : le meilleur, le pire temps et la moyenne d’un athlète pour une épreuve donnée.
+- Qui envoyer au JO : quels sont les trois meilleurs athlètes pour une discipline (meilleurs temps moyen).
+- Progression de l’athlète : afficher la différence de temps d’un athlète pour une même épreuve entre deux dates.
+• L’évolution des performances : afin de pouvoir observer la progression des athlètes, on aimerait pouvoir indiquer la différence de temps pour une même épreuve entre deux entrainements (entre deux dates).
