@@ -5,20 +5,16 @@
 int main(){
 	char *nom="Mayer.txt";
 	// ouvrir le fichier 
-	FILE* fichier =fopen(nom, "r");
-	if(fichier==NULL){
+	FILE* f = fopen(nom, "r");
+	if(f==NULL){
 		exit(1);
 	}
-	// recuperer un caractère
-	
-	int a;
-	a=fgetc(fichier);
-	printf ("%c", a);
-	
-	while(a!=EOF){
-		printf("%c\n",a);
-		a=fgetc(fichier);
+	// recuperer une ligne
+	signed char texte [256];
+	while (fgets (texte, 255, f)!=NULL){
+		printf ("%s\n, texte);
 	}
-	
+
+	fclose (f);
 	return 0;
 }
