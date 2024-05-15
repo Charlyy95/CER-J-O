@@ -22,7 +22,8 @@ int main(){
 typedef struct{
 char nom;
 char epreuve;
-char entrainement;
+char date;
+float temps;	
 }athlete;
 
 }
