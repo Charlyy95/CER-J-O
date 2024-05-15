@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct{
+	char nom;
+	char epreuve;
+	char date;
+	float temps;	
+}athlete;
+
 
 int main(){
 	char *nom="Mayer.txt";
@@ -11,19 +18,13 @@ int main(){
 		exit(1);
 	}
 	// recuperer une ligne
-	signed char texte [256];
+	signed char texte [256]; //taille max de la ligne
 	while (fgets (texte, 255, f)!=NULL){
-		printf ("%s\n", texte);
+		printf("");
 	}
+	printf ("%s", texte);
 
 	fclose (f);
 	return 0;
-
-typedef struct{
-char nom;
-char epreuve;
-char date;
-float temps;	
-}athlete;
 
 }
