@@ -17,13 +17,26 @@ int main(){
 		printf ("fichier non-trouvé");
 		exit(1);
 	}
-	// recuperer une ligne
+	*/ recuperer une ligne
 	signed char texte [256]; //taille max de la ligne
 	while (fgets (texte, 255, f)!=NULL){
 		printf("");
 	}
-	printf ("%s", texte);
+	printf ("%s", texte); */
 
+	
+void liste_entrainement(){
+	signed char texte [256]; //taille max de la ligne
+	
+	
+	
+	fgets (texte, 255, f); 		//prenom nom athlète
+	fgets (texte, 255, f); 		//discipline
+	while (fgets (texte, 255, f)!=NULL){
+		printf ("%s", texte);
+		}
+		
+	}
 	fclose (f);
 	return 0;
 
