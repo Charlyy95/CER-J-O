@@ -18,4 +18,11 @@ int main(){
 
 	fclose (f);
 	return 0;
+
+typedef struct{
+char nom;
+char epreuve;
+char entrainement;
+}athlete;
+
 }
