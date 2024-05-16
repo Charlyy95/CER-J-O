@@ -23,12 +23,13 @@ typedef struct {
 
 void info_entrainement(){
 	
-	char athlete_demande [TAILLE_MAX_LIGNE]; //athlète recherché par l'entraîneur
 	
 	int numero_ligne;
 	int ligne_actuelle = 1;
 	
 	//ouverture du fichier en focntion du nom de l'athlète
+	//--------------------------------------------------------
+	char athlete_demande [TAILLE_MAX_LIGNE]; //athlète recherché par l'entraîneur
 	printf ("Entrez le nom de l'athlete que vous souhaitez :\n");
 	scanf ("%s", athlete_demande);
 	char nom_fichier [TAILLE_MAX_LIGNE];
@@ -40,7 +41,7 @@ void info_entrainement(){
         perror("Probleme ouverture fichier"); //code d'erreur + t"exte entre guillemets renvoyés
         exit(1);
     }
-	rewind(f);
+	//--------------------------------------------------------
 	
     Athlete donnees; // Structure pour stocker les données de l'athlète
     
@@ -81,10 +82,38 @@ void info_entrainement(){
 }
 
 
+void ajout_entrainement(){
+	
+	//ouverture du fichier en focntion du nom de l'athlète
+	//--------------------------------------------------------
+	char athlete_demande [TAILLE_MAX_LIGNE]; //athlète recherché par l'entraîneur
+	printf ("Entrez le nom de l'athlete que vous souhaitez :\n");
+	scanf ("%s", athlete_demande);
+	char nom_fichier [TAILLE_MAX_LIGNE];
+	sprintf(nom_fichier, "%s.txt", athlete_demande);  //créer le nom du fichier
+	
+    FILE *f = fopen(nom_fichier, "a"); 
+
+    if (f == NULL) {
+        perror("Probleme ouverture fichier"); //code d'erreur + t"exte entre guillemets renvoyés
+        exit(1);
+    }
+	//--------------------------------------------------------
+	
+	// Positionner le curseur de fichier à la fin du fichier
+    if (fseek(f, 0, SEEK_END) != 0) {
+        perror("Erreur lors du positionnement du curseur de fichier");
+        fclose(f);
+	}
+	fprintf (f, "05/06/07 14.562\n");
+	
+	fclose(f);
+}
+
 int main() {
     
-	
-	info_entrainement();
+	ajout_entrainement();
+	//info_entrainement();
 	
     return 0;
 }
