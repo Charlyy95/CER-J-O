@@ -2,7 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define TAILLE_MAX_LIGNE 30 // Longueur maximale d'une ligne
+#define TAILLE_MAX_LIGNE 30 // Longueur maximale d'une ligne, un nom et un prénom feront moins de 30 caractères
+
+/*INFOS FONCTIONS
+info_entrainement() écrit toutes les infos d'un entrainement pour un athlete sélectionné 
+*/
+
+
+
+
 
 // Définition de la structure
 typedef struct {
@@ -10,12 +18,12 @@ typedef struct {
     char epreuve[TAILLE_MAX_LIGNE];
     char date[9];
     char temps_seconde[TAILLE_MAX_LIGNE];
-	float temps;
+	float temps;			//utile pour convertir le temps en float après
 } Athlete;
 
 void info_entrainement(){
 	
-	char athlete_demande [TAILLE_MAX_LIGNE];
+	char athlete_demande [TAILLE_MAX_LIGNE]; //athlète recherché par l'entraîneur
 	
 	int numero_ligne;
 	int ligne_actuelle = 1;
@@ -29,7 +37,7 @@ void info_entrainement(){
     FILE *f = fopen(nom_fichier, "r"); 
 
     if (f == NULL) {
-        perror("Problème ouverture fichier");
+        perror("Probleme ouverture fichier"); //code d'erreur + t"exte entre guillemets renvoyés
         exit(1);
     }
 	rewind(f);
