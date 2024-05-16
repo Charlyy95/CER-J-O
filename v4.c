@@ -8,14 +8,19 @@
 typedef struct {
     char nom[TAILLE_MAX_LIGNE];
     char epreuve[TAILLE_MAX_LIGNE];
-    char premiers_8[9];
-    char caracteres_10_11[TAILLE_MAX_LIGNE];
+    char date[9];
+    char temps_seconde[TAILLE_MAX_LIGNE];
+	float temps;
 } Athlete;
 
 void info_entrainement(){
 	
 	char athlete_demande [TAILLE_MAX_LIGNE];
 	
+	int numero_ligne;
+	int ligne_actuelle = 1;
+	
+	//ouverture du fichier en focntion du nom de l'athlète
 	printf ("Entrez le nom de l'athlete que vous souhaitez :\n");
 	scanf ("%s", athlete_demande);
 	char nom_fichier [TAILLE_MAX_LIGNE];
@@ -24,25 +29,24 @@ void info_entrainement(){
     FILE *f = fopen(nom_fichier, "r"); 
 
     if (f == NULL) {
-        perror("Erreur lors de l'ouverture du fichier");
-        exit(EXIT_FAILURE);
+        perror("Problème ouverture fichier");
+        exit(1);
     }
 	rewind(f);
 	
-	
     Athlete donnees; // Structure pour stocker les données de l'athlète
-    int numero_ligne;
+    
     printf("Entrez le numero d'entrainement voulu :\n");
     scanf("%d", &numero_ligne);
     getchar(); // Pour absorber le caractère de saut de ligne restant
 
     // Déterminer quelle partie de la structure à remplir en fonction du numéro de la ligne
-    int ligne_actuelle = 1;
+    
 	
 	fgets(donnees.nom, TAILLE_MAX_LIGNE, f);
 	fgets(donnees.epreuve, TAILLE_MAX_LIGNE, f);
 	
-    while ((fgets(donnees.premiers_8, 9, f)!= NULL)&&(fgets(donnees.caracteres_10_11, TAILLE_MAX_LIGNE, f))!= NULL) {
+    while ((fgets(donnees.date, 9, f)!= NULL)&&(fgets(donnees.temps_seconde, TAILLE_MAX_LIGNE, f))!= NULL) {
         
 		ligne_actuelle++;
 		if (ligne_actuelle == numero_ligne+1) {
@@ -52,15 +56,18 @@ void info_entrainement(){
 
     if (ligne_actuelle < numero_ligne+1) {
         printf("L'entrainement n'existe pas.\n");
-        exit(EXIT_FAILURE);
+        exit(2);
     }
 
     // Afficher les données de la structure
     printf("Entrainement numero :  %d \n", numero_ligne);
     printf("Nom de l'athlete : %s", donnees.nom);
     printf("Epreuve : %s", donnees.epreuve);
-    printf("Date : %s \n", donnees.premiers_8);
-    printf("Temps : %s", donnees.caracteres_10_11);
+    printf("Date : %s \n", donnees.date);
+    printf("Temps : %s", donnees.temps_seconde);
+	
+	donnees.temps = atof (donnees.temps_seconde); //conversion du temps récupéré (char) en float 
+	printf ("le temps est de %.3f secondes \n", donnees.temps);
 	
 	fclose(f);
 }
