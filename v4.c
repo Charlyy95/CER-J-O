@@ -5,7 +5,10 @@
 #define TAILLE_MAX_LIGNE 30 // Longueur maximale d'une ligne, un nom et un prénom feront moins de 30 caractères
 
 /*INFOS FONCTIONS
-info_entrainement() écrit toutes les infos d'un entrainement pour un athlete sélectionné 
+info_entrainement() écrit toutes les infos d'un entrainement pour un athlete sélectionné
+ajout_entrainement() crée un nouvel entraînement en fonction d'un athlète, l'utilisateur 
+
+
 */
 
 
@@ -73,7 +76,7 @@ void info_entrainement(){
     printf("Nom de l'athlete : %s", donnees.nom);
     printf("Epreuve : %s", donnees.epreuve);
     printf("Date : %s \n", donnees.date);
-    printf("Temps : %s", donnees.temps_seconde);
+    printf("Temps : %s\n", donnees.temps_seconde);
 	
 	donnees.temps = atof (donnees.temps_seconde); //conversion du temps récupéré (char) en float 
 	printf ("le temps est de %.3f secondes \n", donnees.temps);
@@ -83,6 +86,9 @@ void info_entrainement(){
 
 
 void ajout_entrainement(){
+	
+	char nouvelle_date [9];
+	char nouveau_temps [7];
 	
 	//ouverture du fichier en focntion du nom de l'athlète
 	//--------------------------------------------------------
@@ -102,17 +108,25 @@ void ajout_entrainement(){
 	
 	// Positionner le curseur de fichier à la fin du fichier
     if (fseek(f, 0, SEEK_END) != 0) {
-        perror("Erreur lors du positionnement du curseur de fichier");
+        perror("Erreur lors du positionnement du curseur dans le fichier");
         fclose(f);
 	}
-	fprintf (f, "05/06/07 14.562\n");
-	
-	fclose(f);
+	// Demander la date de l'entraînement
+    printf("Entrez le nouvel entrainement au format JJ/MM/AA\n");
+    scanf("%8s", nouvelle_date); // Limite à 8 caractères (format JJ/MM/AA)
+    fprintf(f, "\n%s", nouvelle_date);
+    
+    // Demander le temps de l'entraînement
+    printf("Entrez le nouveau temps au format 00.000\n");
+    scanf("%6s", nouveau_temps); // Limite à 6 caractères (format 00.000)
+    fprintf(f, " %s", nouveau_temps); // Ajoute le temps sur la même ligne que la date
+    
+    fclose(f);
 }
 
 int main() {
     
-	ajout_entrainement();
+	//ajout_entrainement();
 	//info_entrainement();
 	
     return 0;
