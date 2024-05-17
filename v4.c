@@ -6,8 +6,8 @@
 
 /*INFOS FONCTIONS
 info_entrainement() écrit toutes les infos d'un entrainement pour un athlete sélectionné
-ajout_entrainement() crée un nouvel entraînement en fonction d'un athlète, l'utilisateur 
-
+ajout_entrainement() crée un nouvel entraînement en fonction d'un athlète, l'utilisateur entre la date et le temps de l'entraînement
+resume_temps_athlete écrit la moyenn, le temps max et le temps minimum de l'athlete sélectionné
 
 */
 
@@ -26,7 +26,6 @@ typedef struct {
 
 void info_entrainement(){
 	
-	
 	int numero_ligne;
 	int ligne_actuelle = 1;
 	
@@ -38,10 +37,10 @@ void info_entrainement(){
 	char nom_fichier [TAILLE_MAX_LIGNE];
 	sprintf(nom_fichier, "%s.txt", athlete_demande);  //créer le nom du fichier
 	
-    FILE *f = fopen(nom_fichier, "r"); 
+    FILE *f = fopen(nom_fichier, "r"); //mode lecture car on récupère juste des infos
 
     if (f == NULL) {
-        perror("Probleme ouverture fichier"); //code d'erreur + t"exte entre guillemets renvoyés
+        perror("Probleme ouverture fichier"); //code d'erreur + texte entre guillemets renvoyés
         exit(1);
     }
 	//--------------------------------------------------------
@@ -54,7 +53,8 @@ void info_entrainement(){
 
     // Déterminer quelle partie de la structure à remplir en fonction du numéro de la ligne
     
-	
+	//Parcours du fichier dans son intégralité
+	//--------------------------------------------------------
 	fgets(donnees.nom, TAILLE_MAX_LIGNE, f);
 	fgets(donnees.epreuve, TAILLE_MAX_LIGNE, f);
 	
@@ -70,6 +70,8 @@ void info_entrainement(){
         printf("L'entrainement n'existe pas.\n");
         exit(2);
     }
+	//--------------------------------------------------------
+	
 
     // Afficher les données de la structure
     printf("Entrainement numero :  %d \n", numero_ligne);
@@ -98,10 +100,10 @@ void ajout_entrainement(){
 	char nom_fichier [TAILLE_MAX_LIGNE];
 	sprintf(nom_fichier, "%s.txt", athlete_demande);  //créer le nom du fichier
 	
-    FILE *f = fopen(nom_fichier, "a"); 
+    FILE *f = fopen(nom_fichier, "a"); //mode ajout car on rajoute des entraînements à la fin du fichier
 
     if (f == NULL) {
-        perror("Probleme ouverture fichier"); //code d'erreur + t"exte entre guillemets renvoyés
+        perror("Probleme ouverture fichier"); //code d'erreur + texte entre guillemets renvoyés
         exit(1);
     }
 	//--------------------------------------------------------
@@ -124,10 +126,72 @@ void ajout_entrainement(){
     fclose(f);
 }
 
+void resume_temps_athlete(){
+	
+	int numero_ligne;
+	int ligne_actuelle = 1;
+	float somme_temps = 0;
+	float min_temps = 1000;
+	float max_temps = 0;
+	
+	//ouverture du fichier en focntion du nom de l'athlète
+	//--------------------------------------------------------
+	char athlete_demande [TAILLE_MAX_LIGNE]; //athlète recherché par l'entraîneur
+	printf ("Entrez le nom de l'athlete que vous souhaitez :\n");
+	scanf ("%s", athlete_demande);
+	char nom_fichier [TAILLE_MAX_LIGNE];
+	sprintf(nom_fichier, "%s.txt", athlete_demande);  //créer le nom du fichier
+	
+    FILE *f = fopen(nom_fichier, "r"); //mode lecture car on récupère juste des infos
+
+    if (f == NULL) {
+        perror("Probleme ouverture fichier"); //code d'erreur + texte entre guillemets renvoyés
+        exit(1);
+    }
+	//--------------------------------------------------------
+	
+	Athlete donnees; // Structure pour stocker les données de l'athlète
+	
+	//Parcours du fichier dans son intégralité
+	//--------------------------------------------------------
+	fgets(donnees.nom, TAILLE_MAX_LIGNE, f);
+	fgets(donnees.epreuve, TAILLE_MAX_LIGNE, f);
+	
+    while ((fgets(donnees.date, 9, f)!= NULL)&&(fgets(donnees.temps_seconde, TAILLE_MAX_LIGNE, f))!= NULL) {
+        
+		donnees.temps = atof (donnees.temps_seconde); //conversion du temps récupéré (char) en float 
+		if (donnees.temps < min_temps){
+			min_temps = donnees.temps;
+		}
+		if (donnees.temps > max_temps){
+			max_temps = donnees.temps;
+		}
+		
+		somme_temps+= donnees.temps;
+		ligne_actuelle++;
+		
+		
+		if (ligne_actuelle == numero_ligne+1) {
+			break;
+		}
+	//printf ("%.3f s\n", donnees.temps);		ligne pour écrire chaque temps 1 par 1
+	}
+	
+	printf ("moyenne des temps : %.3f s\n", (somme_temps/(ligne_actuelle-1)));
+	printf ("temps minimum : %.3f s\n", min_temps);
+	printf ("temps maximum : %.3f s\n", max_temps);
+	//recupérer temps athlete puis max, min, moyenne.
+	
+	
+	//--------------------------------------------------------
+	
+}
+
 int main() {
     
 	//ajout_entrainement();
 	//info_entrainement();
+	//resume_temps_athlete();
 	
     return 0;
 }
