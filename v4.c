@@ -7,7 +7,7 @@
 /*INFOS FONCTIONS
 info_entrainement() écrit toutes les infos d'un entrainement pour un athlete sélectionné
 ajout_entrainement() crée un nouvel entraînement en fonction d'un athlète, l'utilisateur entre la date et le temps de l'entraînement
-resume_temps_athlete écrit la moyenn, le temps max et le temps minimum de l'athlete sélectionné
+resume_temps_athlete() écrit la moyenn, le temps max et le temps minimum de l'athlete sélectionné
 
 */
 
