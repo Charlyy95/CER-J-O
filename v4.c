@@ -80,8 +80,7 @@ void info_entrainement(){
     printf("Date : %s \n", donnees.date);
     printf("Temps : %s\n", donnees.temps_seconde);
 	
-	donnees.temps = atof (donnees.temps_seconde); //conversion du temps récupéré (char) en float 
-	printf ("le temps est de %.3f secondes \n", donnees.temps);
+	donnees.temps = atof (donnees.temps_seconde); //conversion du temps récupéré (char) en float
 	
 	fclose(f);
 }
