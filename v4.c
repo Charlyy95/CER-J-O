@@ -3,12 +3,14 @@
 #include <string.h>
 
 #define TAILLE_MAX_LIGNE 30 // Longueur maximale d'une ligne, un nom et un prénom feront moins de 30 caractères
+#define MAX_ATHLETES 100 // Le nombre maximal d'athletes
 
 /*INFOS FONCTIONS
 info_entrainement() écrit toutes les infos d'un entrainement pour un athlete sélectionné
 ajout_entrainement() crée un nouvel entraînement en fonction d'un athlète, l'utilisateur entre la date et le temps de l'entraînement
 resume_temps_athlete() écrit la moyenn, le temps max et le temps minimum de l'athlete sélectionné
-
+calculer_moyenne() lit les fichiers des athletes (précisément leur temps) et calcule leur temps moyen pour une épreuve demandée ou donnée
+trouver_meilleurs_athletes() lit les fichiers des athlètes, calcule leurs temps moyens, les trier et afficher les trois meilleurs.
 */
 
 
@@ -186,11 +188,87 @@ void resume_temps_athlete(){
 	
 }
 
+float calculer_moyenne(FILE *f, const char *epreuve) {
+    char date[9], temps_seconde[TAILLE_MAX_LIGNE], epreuve_temp[TAILLE_MAX_LIGNE];
+    float temps, somme_temps = 0;
+    int nb_entrainements = 0;
+
+    // Lire le nom et l'épreuve de l'athlète
+    fgets(epreuve_temp, TAILLE_MAX_LIGNE, f); // Lire le nom 
+    fgets(epreuve_temp, TAILLE_MAX_LIGNE, f); // Lire l'épreuve 
+
+    // Lire les dates et les temps de l'athlète
+    while ((fgets(date, 9, f) != NULL) && (fgets(temps_seconde, TAILLE_MAX_LIGNE, f) != NULL)) {
+        temps = atof(temps_seconde); // Convertir le temps de chaîne de caractères en nombre flottant
+        if (strncmp(epreuve_temp, epreuve, strlen(epreuve)) == 0) { // Comparer les epreuves
+            somme_temps += temps; // Ajouter le temps à la somme des temps
+            nb_entrainements++; // Augmenter le compteur d'entraînements
+        }
+    }
+
+    return (nb_entrainements > 0) ? (somme_temps / nb_entrainements) : 0; //Ajouter les temps et diviser par le nombre d'entraînements pour obtenir la moyenne,retourner la moyenne des temps
+}
+
+void trouver_meilleurs_athletes(const char *epreuve) {
+    Athlete athletes[MAX_ATHLETES];
+    int nb_athletes = 0;
+    char nom_fichier[TAILLE_MAX_LIGNE];
+    char nom_athlete[TAILLE_MAX_LIGNE];
+
+    // Lire les fichiers des athlètes
+    while (1) {
+        printf("Entrez le nom de l'athlete (ou 'fin' pour terminer) :\n");
+        scanf("%s", nom_athlete);
+        if (strcmp(nom_athlete, "fin") == 0) break; // Si l'utilisateur entre "fin", arrêter la lecture
+
+        sprintf(nom_fichier, "%s.txt", nom_athlete); // Créer le nom du fichier à partir du nom de l'athlète
+        FILE *f = fopen(nom_fichier, "r"); // Ouvrir le fichier en mode lecture
+        if (f == NULL) {
+            perror("Probleme ouverture fichier");
+            continue; // Si le fichier ne peut pas être ouvert, afficher un message d'erreur et passer au suivant
+        }
+
+        float moyenne = calculer_moyenne(f, epreuve); // Calculer la moyenne des temps pour l'épreuve grace a la fonction créée auparavant
+        fclose(f); // Fermer le fichier
+
+        if (moyenne > 0) {
+            strcpy(athletes[nb_athletes].nom, nom_athlete); // Copier le nom de l'athlète
+            strcpy(athletes[nb_athletes].epreuve, epreuve); // Copier le nom de l'épreuve
+            athletes[nb_athletes].temps = moyenne; // Enregistrer la moyenne des temps
+            nb_athletes++; // Incrémenter le nombre d'athlètes
+        }
+    }
+
+    // Trier les athlètes par temps moyen
+    for (int i = 0; i < nb_athletes - 1; i++) {
+        for (int j = i + 1; j < nb_athletes; j++) {
+            if (athletes[i].temps > athletes[j].temps) {
+                Athlete temp = athletes[i]; // variable temporaire temp pour pouvoir echanger les athletes si par exemple l'athlète à la position i a un temps moyen supérieur à celui de la position j
+                athletes[i] = athletes[j];
+                athletes[j] = temp;
+            }
+        }
+    }
+
+    // Afficher les trois meilleurs athlètes
+    printf("Les trois meilleurs athlètes pour l'épreuve %s sont:\n", epreuve);
+    for (int i = 0; i < 3 && i < nb_athletes; i++) {
+        printf("%s avec un temps moyen de %.3f secondes\n", athletes[i].nom, athletes[i].temps);
+    }
+}
+
+
 int main() {
-    
 	//ajout_entrainement();
 	//info_entrainement();
 	//resume_temps_athlete();
+	//calculer_moyenne();
+	//trouver_meilleurs_athletes();
+ char epreuve[TAILLE_MAX_LIGNE];
+ printf("Entrez l'épreuve pour laquelle vous voulez trouver les meilleurs athlètes :\n");
+ scanf("%s", epreuve);
+ trouver_meilleurs_athletes(epreuve);
+
 	
     return 0;
 }
