@@ -259,16 +259,76 @@ void trouver_meilleurs_athletes(const char *epreuve) {
 
 
 int main() {
-	//ajout_entrainement();
-	//info_entrainement();
-	//resume_temps_athlete();
-	//calculer_moyenne();
-	//trouver_meilleurs_athletes();
- char epreuve[TAILLE_MAX_LIGNE];
- printf("Entrez l'épreuve pour laquelle vous voulez trouver les meilleurs athlètes :\n");
- scanf("%s", epreuve);
- trouver_meilleurs_athletes(epreuve);
+    int choix;  //stocker le choix de l'utilisateur
+    char epreuve[TAILLE_MAX_LIGNE];  //stocker le nom de l'épreuve
+    char athlete[TAILLE_MAX_LIGNE];  //stocker le nom de l'athlète
 
-	
-    return 0;
+    do {
+        // Affichage du menu principal
+        printf("\nMenu:\n");
+        printf("1) Ajouter un entrainement\n");
+        printf("2) Afficher les infos d'un entrainement\n");
+        printf("3) Afficher le résumé des temps d'un athlète\n");
+        printf("4) Calculer la moyenne des temps pour une épreuve\n");
+        printf("5) Trouver les meilleurs athlètes pour une épreuve\n");
+        printf("0) Quitter\n");
+        printf("Entrez votre choix: ");
+
+        // Lecture du choix de l'utilisateur
+        if (scanf("%d", &choix) != 1) {
+            // Si la lecture échoue
+            while (getchar() != '\n');  // Vider le buffer d'entrée
+            choix = -1;  // Valeur invalide pour forcer la réaffichage du menu
+        }
+
+        // Exécution 
+        switch (choix) {
+            case 1:
+                ajout_entrainement();  // Ajouter un nouvel entrainement
+                break;
+            case 2:
+                info_entrainement();  // Afficher les informations d'un entrainement
+                break;
+            case 3:
+                resume_temps_athlete();  // Afficher le résumé des temps d'un athlète
+                break;
+            case 4:
+                // Calculer la moyenne des temps pour une épreuve
+                printf("Entrez l'épreuve pour laquelle vous voulez calculer la moyenne des temps :\n");
+                scanf("%s", epreuve);
+                printf("Entrez le nom de l'athlète :\n");
+                scanf("%s", athlete);
+                {
+                    // Blocs pour déclarer des variables locales
+                    char nom_fichier[TAILLE_MAX_LIGNE];  
+                    sprintf(nom_fichier, "%s.txt", athlete);  // Créer le nom du fichier pour l'athlète
+                    FILE *f = fopen(nom_fichier, "r");  // Ouvrir le fichier en mode lecture
+                    if (f != NULL) {
+                        // Si le fichier est ouvert avec succès
+                        float moyenne = calculer_moyenne(f, epreuve);  // Calculer la moyenne des temps
+                        printf("La moyenne des temps pour l'épreuve %s est %.3f secondes.\n", epreuve, moyenne);
+                        fclose(f);  // Fermer le fichier
+                    } else {
+                        perror("Probleme ouverture fichier");  // Afficher un message d'erreur si le fichier ne peut pas être ouvert
+                    }
+                }
+                break;
+            case 5:
+                // Trouver les meilleurs athlètes pour une épreuve
+                printf("Entrez l'épreuve pour laquelle vous voulez trouver les meilleurs athlètes :\n");
+                scanf("%s", epreuve);
+                trouver_meilleurs_athletes(epreuve);  // Appeler la fonction pour trouver les meilleurs athlètes
+                break;
+            case 0:
+                printf("Au revoir!\n");  // Message de sortie
+                break;
+            default:
+                // Si le choix est invalide, afficher un message d'erreur
+                printf("Choix invalide, veuillez réessayer.\n");
+        }
+    } while (choix != 0);  // Répéter le menu jusqu'à ce que l'utilisateur choisisse de quitter (choix 0)
+
+    return 0;  // Retourner 0 pour indiquer que le programme s'est terminé avec succès
+}
+
 }
