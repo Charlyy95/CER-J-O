@@ -268,10 +268,10 @@ int main() {
         printf("\nMenu:\n");
         printf("1) Ajouter un entrainement\n");
         printf("2) Afficher les infos d'un entrainement\n");
-        printf("3) Afficher le résumé des temps d'un athlète\n");
-        printf("4) Calculer la moyenne des temps pour une épreuve\n");
-        printf("5) Trouver les meilleurs athlètes pour une épreuve\n");
-        printf("0) Quitter\n");
+        printf("3) Afficher le resume des temps d'un athlete\n");
+        printf("4) Calculer la moyenne des temps pour une epreuve\n");
+        printf("5) Trouver les meilleurs athletes pour une epreuve\n");
+        printf("0) Quitter\n\n");
         printf("Entrez votre choix: ");
 
         // Lecture du choix de l'utilisateur
@@ -284,7 +284,10 @@ int main() {
         // Exécution 
         switch (choix) {
             case 1:
-                ajout_entrainement();  // Ajouter un nouvel entrainement
+                
+				if (ajout_entrainement() == "ajout de ligne confirme"){	//confirmation du bon déroulement de la fonction
+					printf ("Ajout de ligne confirme\n");
+				}
                 break;
             case 2:
                 info_entrainement();  // Afficher les informations d'un entrainement
@@ -294,9 +297,9 @@ int main() {
                 break;
             case 4:
                 // Calculer la moyenne des temps pour une épreuve
-                printf("Entrez l'épreuve pour laquelle vous voulez calculer la moyenne des temps :\n");
+                printf("Entrez l'epreuve pour laquelle vous voulez calculer la moyenne des temps :\n");
                 scanf("%s", epreuve);
-                printf("Entrez le nom de l'athlète :\n");
+                printf("Entrez le nom de l'athlete :\n");
                 scanf("%s", athlete);
                 {
                     // Blocs pour déclarer des variables locales
@@ -306,7 +309,7 @@ int main() {
                     if (f != NULL) {
                         // Si le fichier est ouvert avec succès
                         float moyenne = calculer_moyenne(f, epreuve);  // Calculer la moyenne des temps
-                        printf("La moyenne des temps pour l'épreuve %s est %.3f secondes.\n", epreuve, moyenne);
+                        printf("La moyenne des temps pour l'epreuve %s est %.3f secondes.\n", epreuve, moyenne);
                         fclose(f);  // Fermer le fichier
                     } else {
                         perror("Probleme ouverture fichier");  // Afficher un message d'erreur si le fichier ne peut pas être ouvert
