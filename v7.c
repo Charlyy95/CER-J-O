@@ -11,6 +11,14 @@ typedef struct {
     char epreuve[TAILLE_MAX_LIGNE];
 } Athlete;
 
+/*INFOS FONCTIONS
+info_entrainement() récupère toutes les infos d'un entrainement pour un athlete sélectionné / fonctionne avec afficher_entrainement
+ajout_entrainement() crée un nouvel entraînement en fonction d'un athlète, l'utilisateur entre la date, le temps de l'entraînement et la discipline
+resume_temps() écrit la moyenne, le temps max et le temps minimum de l'athlete sélectionné pour une discipline donnée
+trouver_meilleurs_athletes() lit les fichiers des athlètes, calcule leurs temps moyens, les trier et afficher les trois meilleurs.
+*/
+
+
 void info_entrainement(const char* ligne, Athlete* pentrainement) {
     // Utiliser sscanf pour extraire la date et le temps
     sscanf(ligne, "%8s %f", pentrainement->date, &pentrainement->temps);		
