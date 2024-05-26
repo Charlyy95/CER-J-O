@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <float.h> //utilisation de FLT_MAX pour les moyennes
 
 #define TAILLE_MAX_LIGNE 256
 #define TAILLE_MAX_NOM_ATHLETE 20
@@ -128,14 +129,13 @@ char* ajout_entrainement() {
 
 
 
-float resume_temps() {
+float resume_temps(char epreuve_demandee[TAILLE_MAX_LIGNE], char athlete_demande [TAILLE_MAX_NOM_ATHLETE]) {
     
 	
 	//ouverture du fichier en fonction du nom de l'athlète
 	//--------------------------------------------------------
-	char athlete_demande [TAILLE_MAX_NOM_ATHLETE]; //athlète recherché par l'entraîneur
-	printf ("Entrez le nom de l'athlete que vous souhaitez :\n");
-	scanf ("%s", athlete_demande);
+	 //athlète recherché par l'entraîneur
+	
 	char nom_fichier [TAILLE_MAX_NOM_ATHLETE];
 	sprintf(nom_fichier, "%s.txt", athlete_demande);  //créer le nom du fichier
 	
@@ -148,17 +148,15 @@ float resume_temps() {
 	//--------------------------------------------------------
 	
 	char ligne[TAILLE_MAX_LIGNE];
-	char epreuve_demandee[TAILLE_MAX_LIGNE];
-	float min_temps = 10000;
+	
+	float min_temps = FLT_MAX;
 	float max_temps = 0;
     float somme_temps = 0;
     int nombre_entrainements = 0;
 	
 	Athlete pentrainement;
 
-    printf("Entrez le nom de l'epreuve pour laquelle vous souhaitez calculer la moyenne des temps :\n");
-    scanf("%s", epreuve_demandee);
-	
+    	
 	// Lire chaque ligne du fichier
     while (fgets(ligne, sizeof(ligne), f)) {
         // Enlever le saut de ligne à la fin de la ligne lue (si présent)
@@ -187,11 +185,12 @@ float resume_temps() {
     // Calculer la moyenne des temps
     if (nombre_entrainements > 0) {
 		
-		printf ("minimmum : %f\nmaximum : %f\nmoyenne : %f\n", min_temps, max_temps, (somme_temps / nombre_entrainements));
+		printf ("minimmum : %.3f\nmaximum : %.3f\nmoyenne : %.3f\n", min_temps, max_temps, (somme_temps / nombre_entrainements));
         return somme_temps / nombre_entrainements;	
     }
 	
 	else {
+		printf ("aucun entrainement trouvé pour cette epreuve");
         return 0; // Retourner 0 si aucun entraînement pour cette épreuve n'a été trouvé
     }
 }
@@ -202,6 +201,8 @@ int main() {
 	
     int choix;  //stocker le choix de l'utilisateur
 	int numero_ligne; //pour la fonction info_entrainement
+	char athlete_demande[TAILLE_MAX_NOM_ATHLETE];
+	char epreuve_demandee[TAILLE_MAX_LIGNE];
 	
     do {
         // Affichage du menu principal
@@ -209,7 +210,7 @@ int main() {
         printf("1) Ajouter un entrainement\n");
         printf("2) Afficher les infos d'un entrainement\n");
         printf("3) Afficher le resume des temps d'un athlete\n");
-        printf("4) Trouver les meilleurs athletes pour une epreuve\n");
+        //printf("4) Trouver les meilleurs athletes pour une epreuve\n");
         printf("0) Quitter\n\n");
         printf("Entrez votre choix: ");
 
@@ -224,7 +225,7 @@ int main() {
         switch (choix) {
 			
             case 1:
-				ajout_entrainement();
+		ajout_entrainement();
                 break;
 				
             case 2:
@@ -232,19 +233,20 @@ int main() {
                 scanf("%d", &numero_ligne);
                 getchar(); // Pour absorber le caractère de saut de ligne restant
                 afficher_entrainement(numero_ligne+1);
-				break;
+		break;
 	
             case 3:
-                resume_temps();
-				break;
+		printf ("Entrez le nom de l'athlete que vous souhaitez :\n");
+		scanf ("%s", athlete_demande);
+		    
+		printf("Entrez le nom de l'epreuve pour laquelle vous souhaitez calculer la moyenne des temps :\n");
+		scanf("%s", epreuve_demandee);
+	
+                resume_temps(epreuve_demandee, athlete_demande);
+		break;
 				
-   /*         case 4:
-                // Trouver les meilleurs athlètes pour une épreuve
-                printf("Entrez l'épreuve pour laquelle vous voulez trouver les meilleurs athlètes :\n");
-                scanf("%s", epreuve);
-                trouver_meilleurs_athletes(epreuve);  // Appeler la fonction pour trouver les meilleurs athlètes
-                break;
-*/				
+           /* case 4:
+            break;	*/	
 				
             case 0:
                 printf("Au revoir!\n");  // Message de sortie
