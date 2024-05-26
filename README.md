@@ -19,11 +19,13 @@ L'utilsateur entre le nom de l'athlète, la date, le temps et l'épreuve réalis
 
 Affiche les détails d'un entraînement en particulier en spécifiant son numéro et le nom de l'athlète.
 Toutes les données de l'entraînement sont renvoyées à l'utilisateur.
+
 <br>
 
 ## Afficher le résumé des temps d'un athlète
 
 Calcule la moyenne, le temps maximum et le temps minimum des entraînements pour une épreuve spécifique d'un athlète donné.
+Toutes ces données sont renvoyées à l'utilisateur.
 
 <br>
 
