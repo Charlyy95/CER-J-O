@@ -15,7 +15,7 @@ Permet d'ajouter un nouvel entraînement pour un athlète spécifique.
 
 ## Afficher les infos d'un entraînement
 
-Affiche les détails d'un entraînement en particulier en spécifiant son numéro et le nom de l'athlete.
+Affiche les détails d'un entraînement en particulier en spécifiant son numéro et le nom de l'athlète.
 
 ## Afficher le résumé des temps d'un athlète
 
@@ -31,3 +31,10 @@ Permet de quitter le programme.
 - **Afficher les infos d'un entraînement :** Vous pouvez afficher les détails d'un entraînement en saisissant son numéro.
 - **Afficher le résumé des temps d'un athlète :** Vous pouvez récupérer la moyenne, le temps maximum et le temps minimum des entraînements d'un athlète pour une épreuve donnée.
 - **Quitter :** Vous pouvez quitter le programme à tout moment en choisissant l'option correspondante dans le menu.
+
+---
+
+### Réalisé par :
+- **AZZI Ikram-Fatima**
+- **MERIOT Charly**
+- **ABDERRAHMANE**
