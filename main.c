@@ -6,7 +6,7 @@
 #define TAILLE_MAX_LIGNE 256
 #define TAILLE_MAX_NOM_ATHLETE 20
 
-typedef struct {
+typedef struct {                            //structure qui stocke les données des entrainements
     char date[9];
     float temps;
     char epreuve[TAILLE_MAX_LIGNE];
@@ -39,7 +39,6 @@ void info_entrainement(const char* ligne, Athlete* pentrainement) {
     pentrainement->epreuve[TAILLE_MAX_LIGNE - 1] = '\0'; // Assurer la terminaison de la chaîne
 }
 
-// Fonction pour afficher les informations d'un entraînement spécifique
 // Fonction pour afficher les informations d'un entraînement spécifique
 void afficher_entrainement() {
     char athlete_demande[TAILLE_MAX_NOM_ATHLETE];
@@ -152,7 +151,7 @@ float resume_temps(char epreuve_demandee[TAILLE_MAX_LIGNE], char athlete_demande
         exit(1);
     }
   char ligne[TAILLE_MAX_LIGNE];
-      float min_temps = FLT_MAX;
+      float min_temps = FLT_MAX;    //FLT_MAX> tout autre float
       float max_temps = 0;
       float somme_temps = 0;
       int nombre_entrainements = 0;
