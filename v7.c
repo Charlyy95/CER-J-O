@@ -40,9 +40,8 @@ void info_entrainement(const char* ligne, Athlete* pentrainement) {
 }
 
 // Fonction pour afficher les informations d'un entraînement spécifique
-void afficher_entrainement(int numero_ligne) {
-    int ligne_actuelle = 1;
-
+// Fonction pour afficher les informations d'un entraînement spécifique
+void afficher_entrainement() {
     char athlete_demande[TAILLE_MAX_NOM_ATHLETE];
     printf("Entrez le nom de l'athlete que vous souhaitez :\n");
     scanf("%s", athlete_demande);
@@ -51,13 +50,17 @@ void afficher_entrainement(int numero_ligne) {
 
     FILE* f = fopen(nom_fichier, "r"); //mode lecture car on récupère juste des infos
 
-    if (f == NULL) {
-        perror("Probleme ouverture fichier"); //gestion des erreurs de fichier
-        exit(1);
+    // Tant que le fichier n'existe pas, redemander à l'utilisateur de saisir un nom de fichier existant
+    while (f == NULL) {
+        printf("Le fichier pour l'athlète \"%s\" n'existe pas. Veuillez saisir un nom d'athlète existant :\n", athlete_demande);
+        scanf("%s", athlete_demande);
+        sprintf(nom_fichier, "%s.txt", athlete_demande);  //créer le nom du fichier
+        f = fopen(nom_fichier, "r"); //mode lecture car on récupère juste des infos
     }
 
     char ligne[TAILLE_MAX_LIGNE];
     Athlete pentrainement;
+    int ligne_actuelle = 1;
 
     // Lire chaque ligne du fichier
     while (fgets(ligne, sizeof(ligne), f)) {
@@ -66,15 +69,13 @@ void afficher_entrainement(int numero_ligne) {
 
         // Lire les données de l'entraînement à partir de la ligne
         info_entrainement(ligne, &pentrainement);
-        ligne_actuelle++;
 
-        if (ligne_actuelle == numero_ligne) {
-            printf("Date : %s\n", pentrainement.date);
-            printf("Temps : %.3f\n", pentrainement.temps);
-            printf("Epreuve : %s\n", pentrainement.epreuve);
-            printf("\n");
-            break;
-        }
+        printf("Date : %s\n", pentrainement.date);
+        printf("Temps : %.3f\n", pentrainement.temps);
+        printf("Epreuve : %s\n", pentrainement.epreuve);
+        printf("\n");
+
+        ligne_actuelle++;
     }
 
     fclose(f);
