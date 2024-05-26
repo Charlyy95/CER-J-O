@@ -13,6 +13,7 @@ Ce programme en langage C permet de gérer les entraînements sportifs des athl�
 
 Permet d'ajouter un nouvel entraînement pour un athlète spécifique.
 L'utilsateur entre le nom de l'athlète, la date, le temps et l'épreuve réalisée.
+
 <br>
 
 ## Afficher les infos d'un entraînement
