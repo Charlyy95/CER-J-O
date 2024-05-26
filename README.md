@@ -15,7 +15,7 @@ Permet d'ajouter un nouvel entraînement pour un athlète spécifique.
 
 ## Afficher les infos d'un entraînement
 
-Affiche les détails d'un entraînement en particulier en spécifiant son numéro.
+Affiche les détails d'un entraînement en particulier en spécifiant son numéro et le nom de l'athlete.
 
 ## Afficher le résumé des temps d'un athlète
 
