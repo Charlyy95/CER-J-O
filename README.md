@@ -1,4 +1,4 @@
-# Programme de Gestion des Entraînements Sportifs
+# CER-J-O
 
 Ce programme en langage C permet de gérer les entraînements sportifs des athlètes, en permettant d'ajouter de nouveaux entraînements, de récupérer les informations d'un entraînement d'un athlète, et d'obtenir toutes les informations liées au temps des athlètes par discipline.
 
