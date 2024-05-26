@@ -1,5 +1,18 @@
-INFOS FONCTIONS :
+Programme de gestion des entraînements sportifs
 
-info_entrainement() récupère toutes les infos d'un entrainement pour un athlete sélectionné / fonctionne avec afficher_entrainement
-ajout_entrainement() crée un nouvel entraînement en fonction d'un athlète, l'utilisateur entre la date, le temps de l'entraînement et la discipline
-resume_temps() écrit la moyenne, le temps max et le temps minimum de l'athlete sélectionné pour une discipline donnée
+Ce programme C permet de gérer les entraînements sportifs des athlètes, en permettant d'ajouter de nouveaux entraînements, de récupérer les informations d'un entraînement d'un athlète, et d'obtenir toutes les informations liées au temps des athlètes par discipline
+
+Menu :
+
+    Ajouter un entraînement : Permet d'ajouter un nouvel entraînement pour un athlète spécifique.
+    Afficher les infos d'un entraînement : Affiche les détails d'un entraînement en particulier en spécifiant son numéro.
+    Afficher le résumé des temps d'un athlète : Calcule la moyenne, le temps maximum et le temps minimum des entraînements pour une épreuve spécifique d'un athlète donné.
+    Quitter : Permet de quitter le programme.
+
+Il suffit de suivre les instructions affichées à l'écran pour interagir avec le programme.
+Exemple d'utilisation :
+
+    Ajouter un entraînement : Vous pouvez ajouter un nouvel entraînement en saisissant le nom de l'athlète, la date, le temps et l'épreuve correspondante.
+    Afficher les infos d'un entraînement : Vous pouvez afficher les détails d'un entraînement en saisissant son numéro.
+    Afficher le résumé des temps d'un athlète : Vous pouvez récupérer la moyenne, le temps maximum et le temps minimum des entraînements d'un athlète pour une épreuve donnée.
+    Quitter : Vous pouvez quitter le programme à tout moment en choisissant l'option correspondante dans le menu.
