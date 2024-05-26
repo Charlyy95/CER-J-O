@@ -23,6 +23,9 @@ Affiche les détails d'un entraînement en particulier en spécifiant son numér
 On récupère donc la date, le temps et la discipline de cet entraînement.
 
 
+
+
+
 ## Afficher le résumé des temps d'un athlète
 
 Calcule la moyenne, le temps maximum et le temps minimum des entraînements pour une épreuve spécifique d'un athlète donné.
