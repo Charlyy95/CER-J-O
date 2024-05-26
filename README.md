@@ -12,18 +12,21 @@ Ce programme en langage C permet de gérer les entraînements sportifs des athl�
 ## Ajouter un entraînement
 
 Permet d'ajouter un nouvel entraînement pour un athlète spécifique.
+L'utilisateur entre les données suivantes : l'athlète, la date, le temps, et l'épreuve de l'entraînement.
 
 ## Afficher les infos d'un entraînement
 
 Affiche les détails d'un entraînement en particulier en spécifiant son numéro et le nom de l'athlète.
+On récupère donc la date, le temps et la discipline de cet entraînement.
 
 ## Afficher le résumé des temps d'un athlète
 
 Calcule la moyenne, le temps maximum et le temps minimum des entraînements pour une épreuve spécifique d'un athlète donné.
+L'utilisateur récupère la moyenne, le temps maximum et minimum pour une épreuve donnée. 
 
 ## Quitter
 
-Permet de quitter le programme.
+Permet de quitter et de mettre fin au programme.
 
 ## Exemple d'utilisation
 
