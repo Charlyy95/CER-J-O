@@ -133,7 +133,7 @@ char* ajout_entrainement() {
     } while (!verifier_epreuve(nouvelle_epreuve));
 
     // Écrire les données dans le fichier
-    fprintf(f, "%s %.3f %s\n", nouvelle_date, nouveau_temps, nouvelle_epreuve);
+    fprintf(f, "%s%.3f%s\n", nouvelle_date, nouveau_temps, nouvelle_epreuve);
 
     fclose(f);
     return "Ajout de ligne confirmé";
